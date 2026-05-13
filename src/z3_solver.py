@@ -1,6 +1,6 @@
 from z3 import Bool, And, Or, Not, Implies, Solver, unsat
 
-# Criação das variáveis booleanas no Z3
+# criação das variáveis booleanas no Z3
 Z3_VARS = {name: Bool(name) for name in ['P', 'Q', 'R', 'S']}
 
 def parse_to_z3(formula_str):
@@ -9,7 +9,7 @@ def parse_to_z3(formula_str):
     """
     s = formula_str.strip()
 
-    # Caso Base: Variável simples
+    # caso Base: Variável simples
     if s in Z3_VARS:
         return Z3_VARS[s]
     
@@ -45,3 +45,18 @@ def parse_to_z3(formula_str):
                     if "OR" in op: return Or(esq, dir)
 
     raise ValueError(f"Erro de sintaxe. Não foi possível fazer o parse de: {formula_str}")
+
+def check_logical_consequence(premises_strs, conclusion_str):
+    solver = Solver()
+    # faz o parse e adiciona as premissas ao solver
+    for p_str in premises_strs:
+        z3_premise = parse_to_z3(p_str)
+        solver.add(z3_premise)
+
+    # faz o parse e coloca sua negação ao solver
+    z3_conclusion = parse_to_z3(conclusion_str)
+    solver.add(Not(z3_conclusion))
+
+    #se retorna "unsat", não existe cenario em que a premissa é verdadeira e a conclusão falsa. Logo, é válido
+    is_valid = (solver.check() == unsat)
+    return bool(is_valid)
