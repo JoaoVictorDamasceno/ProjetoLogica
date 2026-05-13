@@ -57,6 +57,6 @@ def check_logical_consequence(premises_strs, conclusion_str):
     z3_conclusion = parse_to_z3(conclusion_str)
     solver.add(Not(z3_conclusion))
 
-    #se retorna "unsat", não existe cenario em que a premissa é verdadeira e a conclusão falsa. Logo, é válido
+    #se retorna "unsat", não existe cenário em que a premissa é verdadeira e a conclusão falsa. Logo, é válido
     is_valid = (solver.check() == unsat)
     return bool(is_valid)
