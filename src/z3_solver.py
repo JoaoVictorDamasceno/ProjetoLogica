@@ -10,8 +10,18 @@ def parse_to_z3(formula_str):
     if s in Z3_VARS:
         return Z3_VARS[s]
     
+    # Tratamento de Negação
     if s.startswith("NOT(") and s.endswith(")"):
-        return Not(parse_to_z3(s[4:-1]))
+        nivel = 0
+        engloba_tudo = True
+        for char in s[4:-1]:
+            if char == '(': nivel += 1
+            elif char == ')': nivel -= 1
+            if nivel < 0: 
+                engloba_tudo = False
+                break
+        if engloba_tudo:
+            return Not(parse_to_z3(s[4:-1]))
     
     # remove parênteses externos redundantes
     if s.startswith("(") and s.endswith(")"):

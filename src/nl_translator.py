@@ -31,22 +31,19 @@ def translate_formula_to_text(formula_str, vocab_mapping):
     if s in vocab_mapping:
         return vocab_mapping[s]
         
-    # Tratamento de Negação
+    # Tratamento de Negação: NOT(X) -> "não é verdade que X"
     if s.startswith("NOT(") and s.endswith(")"):
-        inner_text = translate_formula_to_text(s[4:-1], vocab_mapping)
-        return f"não é verdade que {inner_text}"
-        
-    if s.startswith("(") and s.endswith(")"):
         nivel = 0
         engloba_tudo = True
-        for char in s[1:-1]:
+        for char in s[4:-1]:
             if char == '(': nivel += 1
             elif char == ')': nivel -= 1
-            if nivel < 0: 
+            if nivel < 0:
                 engloba_tudo = False
                 break
         if engloba_tudo:
-            return translate_formula_to_text(s[1:-1], vocab_mapping)
+            inner_text = translate_formula_to_text(s[4:-1], vocab_mapping)
+            return f"não é verdade que {inner_text}"
 
     nivel = 0
     for i in range(len(s) - 1, -1, -1):
