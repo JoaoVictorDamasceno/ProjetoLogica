@@ -58,3 +58,10 @@ def generate_batch(size=10):
         else:
             batch.append(generate_complex_argument())
     return batch
+
+if __name__ == "__main__":
+    print("--- Argumento Simples ---")
+    print(generate_simple_argument())
+    
+    print("\n--- Argumento Complexo ---")
+    print(generate_complex_argument())

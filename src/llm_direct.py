@@ -44,3 +44,6 @@ Responda APENAS com a palavra "VÁLIDO" se a conclusão for uma consequência l�
     except Exception as e:
         print(f"Erro ao chamar a API do Gemini: {e}")
         return None
+
+if __name__ == "__main__":
+    run_direct_evaluation()

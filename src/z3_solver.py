@@ -4,9 +4,6 @@ from z3 import Bool, And, Or, Not, Implies, Solver, unsat
 Z3_VARS = {name: Bool(name) for name in ['P', 'Q', 'R', 'S']}
 
 def parse_to_z3(formula_str):
-    """
-    Converte a string da fórmula proposicional para uma expressão do Z3.
-    """
     s = formula_str.strip()
 
     # caso Base: Variável simples
@@ -60,3 +57,10 @@ def check_logical_consequence(premises_strs, conclusion_str):
     #se retorna "unsat", não existe cenário em que a premissa é verdadeira e a conclusão falsa. Logo, é válido
     is_valid = (solver.check() == unsat)
     return bool(is_valid)
+
+if __name__ == "__main__":
+    # Testando Modus Ponens: P -> Q, P |- Q (Deve ser True)
+    print("Modus Ponens Válido?", check_logical_consequence(["P IMPLIES Q", "P"], "Q"))
+    
+    # Testando Falácia: P -> Q, Q |- P (Deve ser False)
+    print("Falácia Válida?", check_logical_consequence(["P IMPLIES Q", "Q"], "P"))

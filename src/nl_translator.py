@@ -67,3 +67,18 @@ def translate_formula_to_text(formula_str, vocab_mapping):
                         return f"{esq} ou {dir}"
                         
     return formula_str
+
+if __name__ == "__main__":
+    # Simula um mapeamento para um argumento
+    mapping = generate_vocabulary_mapping(['P', 'Q', 'R'])
+    print("Mapeamento gerado:", mapping)
+    
+    # Teste 1: Modus Ponens
+    f1 = "P IMPLIES Q"
+    print(f"\nFórmula: {f1}")
+    print(f"Texto:   {translate_formula_to_text(f1, mapping)}")
+    
+    # Teste 2: Expressão Complexa
+    f2 = "((P AND Q) OR (NOT(R)))"
+    print(f"\nFórmula: {f2}")
+    print(f"Texto:   {translate_formula_to_text(f2, mapping)}")
