@@ -9,7 +9,7 @@ from nl_translator import (
     VARIABLES
 )
 
-def create_final_dataset(filename="../data/dataset_final.json", size=100):
+def create_final_dataset(filename="data/dataset_final.json", size=100):
     # Garante que a pasta data existe
     os.makedirs(os.path.dirname(filename), exist_ok=True)
 
@@ -43,7 +43,7 @@ def create_final_dataset(filename="../data/dataset_final.json", size=100):
         )
 
         record = {
-            "id": str(uuid.uuid4())[:8],  # Gera um ID curto e único
+            "id": str(uuid.uuid4())[:8],  
             "type": item["type"],
             "premises_formula": item["premises"],
             "conclusion_formula": item["conclusion"],
@@ -60,10 +60,10 @@ def create_final_dataset(filename="../data/dataset_final.json", size=100):
     print(f"Dataset final criado com sucesso em: {filename}")
 
 if __name__ == "__main__":
-    #gera um dataset de 200 exemplos
+    # gera um dataset de 200 exemplos
     create_final_dataset(size=200)
     
-    with open("../data/dataset_final.json", 'r', encoding='utf-8') as f:
+    with open("data/dataset_final.json", 'r', encoding='utf-8') as f:
         data = json.load(f)
         print("\n--- Amostra do Dataset Gerado ---")
         print(json.dumps(data[0], indent=2, ensure_ascii=False))
