@@ -9,7 +9,6 @@ from nl_translator import (
     VARIABLES
 )
 
-
 def create_final_dataset(filename="../data/dataset_final.json", size=100):
     # Garante que a pasta data existe
     os.makedirs(os.path.dirname(filename), exist_ok=True)
