@@ -13,7 +13,7 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-MODEL_ID = 'gemini-3.5-flash'
+MODEL_ID = 'gemini-3.1-flash-lite'
 
 def evaluate_direct_logic(premises_text, conclusion_text):
     premises_formatted = "\n".join([f"{i+1}. {p}" for i, p in enumerate(premises_text)])
