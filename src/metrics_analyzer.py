@@ -48,9 +48,9 @@ def extract_error_cases(dataset):
         pred_direct = item.get("llm_direct_prediction")
         pred_solver = item.get("llm_solver_prediction")
         
-        # Analisando Erros da Abordagem Direta
+        # analisando Erros da Abordagem Direta
         if pred_direct is not None:
-            if pred_direct != gt:  # Garante que só vai processar se houver erro
+            if pred_direct != gt:  # garante que só vai processar se houver erro
                 if pred_direct is True and gt is False:
                     errors["direct_false_positives"].append({"id": item["id"], "type": item["type"]})
                 elif pred_direct is False and gt is True:
