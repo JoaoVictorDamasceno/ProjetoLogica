@@ -50,7 +50,7 @@ def extract_error_cases(dataset):
         
         # analisando Erros da Abordagem Direta
         if pred_direct is not None:
-            if pred_direct != gt:  # garante que só vai processar se houver erro
+            if pred_direct != gt: 
                 if pred_direct is True and gt is False:
                     errors["direct_false_positives"].append({"id": item["id"], "type": item["type"]})
                 elif pred_direct is False and gt is True:
@@ -103,3 +103,7 @@ def run_analysis(input_file="data/results_full.json", output_metrics="data/metri
     print(json.dumps(metrics_direct, indent=2))
     print("\n[RESULTADOS - ABORDAGEM 2: LLM + Z3 SOLVER]")
     print(json.dumps(metrics_solver, indent=2))
+    
+    
+if __name__ == "__main__":
+    run_analysis()

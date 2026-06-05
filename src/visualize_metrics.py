@@ -48,7 +48,7 @@ def generate_charts(input_file="data/metrics_report.json", output_file="data/met
     fig.tight_layout()
     
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    plt.savefig(output_file, dpi=300) # Salva com alta resolução
+    plt.savefig(output_file, dpi=300)
     print(f"Gráfico gerado com sucesso! Arquivo salvo em: {output_file}")
 
 if __name__ == "__main__":

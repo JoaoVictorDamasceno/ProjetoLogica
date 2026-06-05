@@ -1,6 +1,6 @@
 import random
 
-# Banco de proposições simples para preencher as variáveis lógicas
+# Banco de proposições simples
 PROPOSITIONS_BANK = [
     "chove",
     "a rua fica molhada",
@@ -31,7 +31,7 @@ def translate_formula_to_text(formula_str, vocab_mapping):
     if s in vocab_mapping:
         return vocab_mapping[s]
         
-    # Tratamento de Negação: NOT(X) -> "não é verdade que X"
+    # Tratamento de negação
     if s.startswith("NOT(") and s.endswith(")"):
         nivel = 0
         engloba_tudo = True
@@ -50,7 +50,6 @@ def translate_formula_to_text(formula_str, vocab_mapping):
         if s[i] == ')': nivel += 1
         elif s[i] == '(': nivel -= 1
         elif nivel == 0 and s[i] == ' ':
-            # Substituição usando templates de texto
             for op in [" IMPLIES ", " AND ", " OR "]:
                 if s[i-len(op)+1 : i+1] == op:
                     esq = translate_formula_to_text(s[:i-len(op)+1], vocab_mapping)
@@ -66,7 +65,6 @@ def translate_formula_to_text(formula_str, vocab_mapping):
     return formula_str
 
 if __name__ == "__main__":
-    # Simula um mapeamento para um argumento
     mapping = generate_vocabulary_mapping(['P', 'Q', 'R'])
     print("Mapeamento gerado:", mapping)
     
